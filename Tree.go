@@ -64,16 +64,14 @@ func (tree *IntTree) recursiveInsert(node *IntNode, new *IntNode) *IntNode {
 }
 
 func (tree *IntTree) search(p *IntNode, el int) *IntNode {
-	for p != nil {
-		if el == p.key {
-			return p
-		} else if el < p.key {
-			p = p.left
-		} else {
-			p = p.right
-		}
+	if el == p.key {
+		return p
+	} else if el < p.key {
+		p = p.left
+	} else {
+		p = p.right
 	}
-	return nil
+	return tree.search(p, el)
 }
 
 func (tree *IntTree) breadthFirst() {
@@ -120,12 +118,15 @@ func (tree *IntTree) postorder(p *IntNode) {
 }
 
 func (tree *IntTree) dfs(p *IntNode, el int) *IntNode {
-	if p != nil {
-		if el == p.key {
+	if p == nil {
+		return nil
+	} else if p.key == el {
+		return p
+	} else {
+		if p := tree.dfs(p.left, el); p != nil {
 			return p
 		}
-		tree.dfs(p.left, el)
-		tree.dfs(p.right, el)
+		return tree.dfs(p.right, el)
 	}
-	return nil
+
 }

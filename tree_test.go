@@ -57,6 +57,6 @@ func TestDepthFirstSearch(t *testing.T) {
 
 	tree.fill([]int{4, 5, 2, 1, 3})
 
-	fmt.Println(tree.dfs(tree.root, 2))
+	fmt.Println(tree.dfs(tree.root, 2).key)
 
 }
